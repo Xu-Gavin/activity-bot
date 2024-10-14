@@ -20,7 +20,7 @@ for (const folder of cmdFolders) {
         if (cmd) {
             cmds.push(cmd.data.toJSON());
         } else {
-            console.log(`[WARNING] The cmd at ${filePath} is missing a required "data" or "execute" property.`);
+            console.log(`[WARNING] The cmd at ${filePath} was not loaded as it does not adhere to the slashCmdModule interface.`);
         }
     }
 }
