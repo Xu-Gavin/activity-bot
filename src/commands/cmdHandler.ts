@@ -13,10 +13,12 @@ export async function loadActivateCmds(client: Client<boolean>) {
 
 async function loadCmds() {
     const cmds = new Collection<cmdName, cmdFunc>();
-    const cmdDir = readdirSync(cur_dir).filter(file => !file.endsWith('.js'));
+    const cmdDir = readdirSync(cur_dir)
+        .filter(file => !file.endsWith('.js') && !file.endsWith('.ts'));
     for (const folder of cmdDir) {
         const cmdPaths = join(cur_dir, folder);
-        const cmdFiles = readdirSync(cmdPaths).filter(file => file.endsWith('.js'));
+        const cmdFiles = readdirSync(cmdPaths)
+            .filter(file => file.endsWith('.js') || file.endsWith('.ts'));
         for (const file of cmdFiles) {
             const cmdFilePath = join(cmdPaths, file);
             const cmd = (await import(cmdFilePath)).default as slashCmdModule;
