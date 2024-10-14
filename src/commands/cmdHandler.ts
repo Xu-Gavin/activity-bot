@@ -26,7 +26,7 @@ async function loadCmds() {
                 cmds.set(cmd.data.name, cmd.execute);
                 console.log(`[LOG] Loaded command '${cmd.data.name}' successfully from '${cmdFilePath}'`);
             } else {
-                console.log(`[WARNING] The command at ${cmdFilePath} is missing a required "data" or "execute" property.`);
+                console.log(`[WARNING] The command at ${cmdFilePath} was not loaded as it does not adhere to the slashCmdModule interface.`);
             }
         }
     }
