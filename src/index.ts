@@ -4,8 +4,8 @@ import { Client, Events, GatewayIntentBits } from 'discord.js';
 import { loadCmds } from './commands/cmdLoader.js';
 
 // Constants
-const client = new Client({ intents: [GatewayIntentBits.Guilds] })
-const { token } = JSON.parse(fs.readFileSync('./config.json', 'utf-8'));
+const client: Client<boolean> = new Client({ intents: [GatewayIntentBits.Guilds] })
+const { token }: { token: string } = JSON.parse(fs.readFileSync('./config.json', 'utf-8'));
 
 // Main Script
 loadCmds(client);
