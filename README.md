@@ -12,6 +12,16 @@ or
 ./run.sh
 ```
 
+## Deploy Commands
+Slash commands need to be registered with Discord before they are set.
+```bash
+tsx deploy-commands.ts
+```
+or
+```bash
+./deployCmds.sh
+```
+
 ## Sample `config.json`
 `config.json` must have the following fields:
 ```json
