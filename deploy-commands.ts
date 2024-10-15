@@ -16,7 +16,7 @@ for (const folder of cmdFolders) {
         .filter(file => file.endsWith('.js') || file.endsWith('.ts'));
     for (const file of cmdFiles) {
         const filePath = join(cmdsPath, file);
-        const cmd = (await import(filePath)).default as import('./src/types/cmd').slashCmdModule;
+        const cmd = (await import(filePath)).default as import('./src/types/cmd').cmdModule;
         if (cmd) {
             cmds.push(cmd.data.toJSON());
         } else {
