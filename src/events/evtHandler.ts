@@ -1,8 +1,8 @@
 import { readdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { evtModule } from '../types/declarations/evt';
 import { Client } from 'discord.js';
+import { isEvtModule } from '../types/guards/evtGuard';
 
 const evtDir = dirname(fileURLToPath(import.meta.url));
 
@@ -15,8 +15,8 @@ export async function loadActivateEvts(client: Client<boolean>) {
             .filter(file => file.endsWith('.js') || file.endsWith('.ts'));
         for (const file of evtFiles) {
             const evtFilePath = join(evtPath, file)
-            const event = (await import(evtFilePath)).default as evtModule;
-            if (event) {
+            const event = (await import(evtFilePath)).default;
+            if (isEvtModule(event)) {
                 if (event.once) {
                     client.once(event.name, event.execute);
                 } else {
