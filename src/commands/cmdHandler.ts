@@ -11,7 +11,7 @@ export async function loadActivateCmds(client: Client<boolean>) {
     activateCmds(await cmds, client);
 }
 
-async function loadCmds() {
+async function loadCmds(): Promise<Collection<cmdName, cmdFunc>> {
     const cmds = new Collection<cmdName, cmdFunc>();
     const cmdDir = readdirSync(cur_dir)
         .filter(file => !file.endsWith('.js') && !file.endsWith('.ts'));
