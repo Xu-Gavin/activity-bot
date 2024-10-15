@@ -2,7 +2,8 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'node:path';
 import { Client, Collection, Events } from 'discord.js';
 import { readdirSync } from 'node:fs';
-import { cmdFunc, cmdName, cmdModule } from '../types/declarations/cmd';
+import { cmdFunc, cmdName } from '../types/declarations/cmd';
+import { isCmdModule } from '../types/guards/cmdGuard';
 
 const cur_dir = dirname(fileURLToPath(import.meta.url));
 
@@ -21,8 +22,8 @@ async function loadCmds(): Promise<Collection<cmdName, cmdFunc>> {
             .filter(file => file.endsWith('.js') || file.endsWith('.ts'));
         for (const file of cmdFiles) {
             const cmdFilePath = join(cmdPaths, file);
-            const cmd = (await import(cmdFilePath)).default as cmdModule;
-            if (cmd) {
+            const cmd = (await import(cmdFilePath)).default;
+            if (isCmdModule(cmd)) {
                 cmds.set(cmd.data.name, cmd.execute);
                 console.log(`[LOG] Loaded command '${cmd.data.name}' successfully from '${cmdFilePath}'`);
             } else {
