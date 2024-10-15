@@ -1,5 +1,5 @@
 import { Client, Events } from "discord.js";
-import { evtModule } from "../../types/evt"
+import { evtModule } from "../../types/declarations/evt"
 
 const readyEvt: evtModule = {
     name: Events.ClientReady,

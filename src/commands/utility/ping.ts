@@ -1,5 +1,5 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
-import { cmdModule } from "../../types/cmd";
+import { cmdModule } from "../../types/declarations/cmd";
 
 const pingCmd: cmdModule = {
     data: new SlashCommandBuilder()
