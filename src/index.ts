@@ -1,7 +1,8 @@
 // Imports
 import fs from 'node:fs';
-import { Client, Events, GatewayIntentBits } from 'discord.js';
+import { Client, GatewayIntentBits } from 'discord.js';
 import { loadActivateCmds } from './commands/cmdHandler.js';
+import { loadActivateEvts } from './events/evtHandler.js';
 
 // Constants
 const client: Client<boolean> = new Client({ intents: [GatewayIntentBits.Guilds] })
@@ -9,9 +10,6 @@ const { token }: { token: string } = JSON.parse(fs.readFileSync('./config.json',
 
 // Main Script
 loadActivateCmds(client);
-
-client.once(Events.ClientReady, readyClient => {
-    console.log(`[LOG] Ready! Logged in as ${readyClient.user.tag}`);
-});
+loadActivateEvts(client);
 
 client.login(token);

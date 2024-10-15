@@ -16,11 +16,11 @@ for (const folder of cmdFolders) {
         .filter(file => file.endsWith('.js') || file.endsWith('.ts'));
     for (const file of cmdFiles) {
         const filePath = join(cmdsPath, file);
-        const cmd = (await import(filePath)).default as import('./src/types/cmd').slashCmdModule;
+        const cmd = (await import(filePath)).default as import('./src/types/declarations/cmd').cmdModule;
         if (cmd) {
             cmds.push(cmd.data.toJSON());
         } else {
-            console.log(`[WARNING] The cmd at ${filePath} is missing a required "data" or "execute" property.`);
+            console.log(`[WARNING] The cmd at ${filePath} was not loaded as it does not adhere to the slashCmdModule interface.`);
         }
     }
 }

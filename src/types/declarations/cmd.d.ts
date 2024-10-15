@@ -4,7 +4,7 @@ export type cmdName = string;
 export type cmdData = SlashCommandBuilder;
 export type cmdFunc = (interaction: ChatInputCommandInteraction) => Promise<void>;
 
-export interface slashCmdModule {
+export interface cmdModule {
     data: cmdData;
     execute: cmdFunc;
 }

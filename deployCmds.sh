@@ -1,2 +1,2 @@
 #!/bin/bash
-tsx deploy-commands.ts
+tsx deployCmds.ts
