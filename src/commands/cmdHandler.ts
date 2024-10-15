@@ -2,7 +2,7 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'node:path';
 import { Client, Collection, Events } from 'discord.js';
 import { readdirSync } from 'node:fs';
-import { cmdFunc, cmdName, slashCmdModule } from '../types/cmd';
+import { cmdFunc, cmdName, cmdModule } from '../types/cmd';
 
 const cur_dir = dirname(fileURLToPath(import.meta.url));
 
@@ -21,12 +21,12 @@ async function loadCmds(): Promise<Collection<cmdName, cmdFunc>> {
             .filter(file => file.endsWith('.js') || file.endsWith('.ts'));
         for (const file of cmdFiles) {
             const cmdFilePath = join(cmdPaths, file);
-            const cmd = (await import(cmdFilePath)).default as slashCmdModule;
+            const cmd = (await import(cmdFilePath)).default as cmdModule;
             if (cmd) {
                 cmds.set(cmd.data.name, cmd.execute);
                 console.log(`[LOG] Loaded command '${cmd.data.name}' successfully from '${cmdFilePath}'`);
             } else {
-                console.log(`[WARNING] The command at ${cmdFilePath} was not loaded as it does not adhere to the slashCmdModule interface.`);
+                console.log(`[WARNING] The command at ${cmdFilePath} was not loaded as it does not adhere to the cmdModule interface.`);
             }
         }
     }

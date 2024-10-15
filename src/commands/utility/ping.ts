@@ -1,7 +1,7 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
-import { slashCmdModule } from "../../types/cmd";
+import { cmdModule } from "../../types/cmd";
 
-const pingCmd: slashCmdModule = {
+const pingCmd: cmdModule = {
     data: new SlashCommandBuilder()
         .setName('ping')
         .setDescription('Replies with Pong!'),
