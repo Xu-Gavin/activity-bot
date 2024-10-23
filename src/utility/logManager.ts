@@ -1,3 +1,5 @@
+import chalk from "chalk";
+
 class LogManager {
     static logInfo(msg: string) {
         console.log(); // TODO: finish
