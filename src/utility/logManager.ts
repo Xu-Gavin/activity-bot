@@ -16,6 +16,6 @@ class LogManager {
     }
 
     static logError(msg: string) {
-        console.log(); // TODO: finish
+        console.log(error("[ERROR]", msg));
     }
 }
