@@ -12,7 +12,7 @@ class LogManager {
     }
 
     static logWarning(msg: string) {
-        console.log(); // TODO: finish
+        console.log(warning("[WARNING]", msg));
     }
 
     static logError(msg: string) {
