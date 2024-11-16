@@ -8,7 +8,7 @@ const info = chalk.cyan;
 
 class LogManager {
     static logInfo(msg: string) {
-        console.log(info("[INFO]", msg)); // TODO: finish
+        console.log(info("[INFO]", msg));
     }
 
     static logWarning(msg: string) {
