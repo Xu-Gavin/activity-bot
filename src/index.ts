@@ -5,8 +5,15 @@ import { loadActivateCmds } from 'commands/cmdHandler.ts';
 import { loadActivateEvts } from 'events/evtHandler.ts';
 
 // Constants
-const client: Client<boolean> = new Client({ intents: [GatewayIntentBits.Guilds] })
 const { token }: { token: string } = JSON.parse(fs.readFileSync('./config.json', 'utf-8'));
+const client: Client<boolean> = new Client({
+    intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildVoiceStates,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent
+    ]
+})
 
 // Main Script
 loadActivateCmds(client);
