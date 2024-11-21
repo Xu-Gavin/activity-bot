@@ -1,5 +1,6 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
-import { cmdModule } from "../../types/declarations/cmd";
+import { cmdModule } from "types/declarations/cmd";
+import { LogManager } from "utility/logManager";
 
 const pingCmd: cmdModule = {
     data: new SlashCommandBuilder()
@@ -8,7 +9,7 @@ const pingCmd: cmdModule = {
 
     execute: (async (interaction: ChatInputCommandInteraction) => {
         await interaction.reply('Pong');
-        console.log(`[LOG] Received a ping from '${interaction.member?.user.username}', replied with pong`)
+        LogManager.logSuccess(`Received a ping from '${interaction.member?.user.username}', replied with pong`)
     })
 };
 
