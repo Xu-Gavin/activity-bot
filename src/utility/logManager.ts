@@ -11,6 +11,10 @@ class LogManager {
         console.log(info("[INFO]", msg));
     }
 
+    static logSuccess(msg: string) {
+        console.log(success("[SUCCESS]", msg));
+    }
+
     static logWarning(msg: string) {
         console.log(warning("[WARNING]", msg));
     }
