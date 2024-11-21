@@ -4,6 +4,7 @@ import { Client, Collection, Events } from 'discord.js';
 import { readdirSync } from 'node:fs';
 import { cmdFunc, cmdName } from 'types/declarations/cmd';
 import { isCmdModule } from 'types/guards/cmdGuard';
+import { LogManager } from 'utility/logManager';
 
 const cur_dir = dirname(fileURLToPath(import.meta.url));
 
@@ -25,9 +26,9 @@ async function loadCmds(): Promise<Collection<cmdName, cmdFunc>> {
             const cmd = (await import(cmdFilePath)).default;
             if (isCmdModule(cmd)) {
                 cmds.set(cmd.data.name, cmd.execute);
-                console.log(`[LOG] Loaded command '${cmd.data.name}' successfully from '${cmdFilePath}'`);
+                LogManager.logSuccess(`Loaded command '${cmd.data.name}' successfully from '${cmdFilePath}'`);
             } else {
-                console.log(`[WARNING] The command at ${cmdFilePath} was not loaded as it does not adhere to the cmdModule interface.`);
+                LogManager.logWarning(`The command at ${cmdFilePath} was not loaded as it does not adhere to the cmdModule interface.`);
             }
         }
     }
@@ -40,14 +41,16 @@ async function activateCmds(cmds: Collection<cmdName, cmdFunc>, client: Client<b
         const command = cmds.get(interaction.commandName);
 
         if (!command) {
-            console.error(`[ERROR] No command matching ${interaction.commandName} was found.`);
+            LogManager.logError(`No command matching ${interaction.commandName} was found.`);
             return;
         }
 
         try {
             await command(interaction);
         } catch (error) {
-            console.error(error);
+            let msg: string = 'There was an undefined error while executing a command!';
+            if (error instanceof Error) msg = error.message;
+            LogManager.logError(msg);
             const errMsg = { content: '[ERROR] There was an error while executing this command!', ephemeral: true }
             if (interaction.replied || interaction.deferred) {
                 await interaction.followUp(errMsg);

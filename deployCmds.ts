@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import { fileURLToPath } from 'url';
 import { APIApplicationCommand, REST, RESTPostAPIChatInputApplicationCommandsJSONBody, Routes } from 'discord.js';
 import { dirname, join } from 'node:path';
+import { LogManager } from './src/utility/logManager'
 
 const { clientId, guildId, token } = JSON.parse(fs.readFileSync('./config.json', 'utf-8'));
 const cmds: RESTPostAPIChatInputApplicationCommandsJSONBody[] = [];
@@ -20,7 +21,7 @@ for (const folder of cmdFolders) {
         if (cmd) {
             cmds.push(cmd.data.toJSON());
         } else {
-            console.log(`[WARNING] The cmd at ${filePath} was not loaded as it does not adhere to the slashCmdModule interface.`);
+            LogManager.logWarning(`The cmd at ${filePath} was not loaded as it does not adhere to the slashCmdModule interface.`)
         }
     }
 }
@@ -29,13 +30,15 @@ const rest = new REST().setToken(token);
 
 (async () => {
     try {
-        console.log(`Starting refreshing ${cmds.length} application (/) cmds.`);
+        LogManager.logInfo(`Starting refreshing ${cmds.length} application (/) cmds.`)
         const data = await rest.put(
             Routes.applicationGuildCommands(clientId, guildId),
             { body: cmds }
         ) as APIApplicationCommand[];
-        console.log(`Successfully reloaded ${data.length} application (/) cmds.`);
+        LogManager.logSuccess(`Successfully reloaded ${data.length} application (/) cmds.`);
     } catch (error) {
-        console.log(error);
+        let msg: string = 'There was an undefined error while executing a command!';
+        if (error instanceof Error) msg = error.message;
+        LogManager.logError(msg);
     }
 })();

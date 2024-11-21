@@ -3,6 +3,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Client } from 'discord.js';
 import { isEvtModule } from 'types/guards/evtGuard';
+import { LogManager } from 'utility/logManager';
 
 const evtDir = dirname(fileURLToPath(import.meta.url));
 
@@ -22,9 +23,9 @@ export async function loadActivateEvts(client: Client<boolean>) {
                 } else {
                     client.on(event.name, event.execute);
                 }
-                console.log(`[LOG] Activated event listening ${event.once ? 'once': 'continuously'} for '${event.name}' successfully from '${evtFilePath}'`);
+                LogManager.logSuccess(`Activated event listening ${event.once ? 'once': 'continuously'} for '${event.name}' successfully from '${evtFilePath}'`);
             } else {
-                console.log(`[WARNING] The event at ${evtFilePath} was not activated as it does not adhere to the evtModule interface.`);
+                LogManager.logWarning(`The event at ${evtFilePath} was not activated as it does not adhere to the evtModule interface.`);
             }
         }
     }
