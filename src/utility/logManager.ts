@@ -3,7 +3,7 @@ import chalk from "chalk";
 // Constants
 const error = chalk.bold.red;
 const warning = chalk.hex('#FFA500');
-const success = chalk.greenBright;
+const success = chalk.green;
 const info = chalk.cyan;
 
 export class LogManager {
