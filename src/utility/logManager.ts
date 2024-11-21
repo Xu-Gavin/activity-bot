@@ -6,7 +6,7 @@ const warning = chalk.hex('#FFA500');
 const success = chalk.greenBright;
 const info = chalk.cyan;
 
-class LogManager {
+export class LogManager {
     static logInfo(msg: string) {
         console.log(info("[INFO]", msg));
     }
