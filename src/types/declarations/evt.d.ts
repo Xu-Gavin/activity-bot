@@ -1,9 +1,9 @@
-import { Client } from "discord.js";
+import { Client, ClientEvents } from "discord.js";
 
-export type evtFunc = (client: Client<true>) => void;
+export type evtFunc<K extends keyof ClientEvents> = (...args: ClientEvents[K]) => void;
 
-export interface evtModule {
+export interface evtModule<K extends keyof ClientEvents> {
     name: Events,
     once: boolean,
-    execute: evtFunc
+    execute: evtFunc<K>
 }

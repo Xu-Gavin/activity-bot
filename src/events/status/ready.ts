@@ -2,7 +2,7 @@ import { Client, Events } from "discord.js";
 import { evtModule } from "types/declarations/evt"
 import { LogManager } from "utility/logManager";
 
-const readyEvt: evtModule = {
+const readyEvt: evtModule<Events.ClientReady> = {
     name: Events.ClientReady,
     once: true,
     execute: (readyClient: Client<true>) => {
