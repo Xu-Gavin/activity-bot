@@ -1,5 +1,5 @@
 import { Events } from "discord.js";
-import { evtModule } from "../declarations/evt";
+import { evtModule } from "types/declarations/evt";
 
 export function isEvtModule(event: any): event is evtModule {
     return (

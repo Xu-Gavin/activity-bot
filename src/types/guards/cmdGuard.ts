@@ -1,4 +1,4 @@
-import { cmdModule } from "../declarations/cmd";
+import { cmdModule } from "types/declarations/cmd";
 
 export function isCmdModule(cmd: any): cmd is cmdModule {
     return (

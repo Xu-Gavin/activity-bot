@@ -2,8 +2,8 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'node:path';
 import { Client, Collection, Events } from 'discord.js';
 import { readdirSync } from 'node:fs';
-import { cmdFunc, cmdName } from '../types/declarations/cmd';
-import { isCmdModule } from '../types/guards/cmdGuard';
+import { cmdFunc, cmdName } from 'types/declarations/cmd';
+import { isCmdModule } from 'types/guards/cmdGuard';
 
 const cur_dir = dirname(fileURLToPath(import.meta.url));
 

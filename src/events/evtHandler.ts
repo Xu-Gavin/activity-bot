@@ -2,7 +2,7 @@ import { readdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Client } from 'discord.js';
-import { isEvtModule } from '../types/guards/evtGuard';
+import { isEvtModule } from 'types/guards/evtGuard';
 
 const evtDir = dirname(fileURLToPath(import.meta.url));
 
